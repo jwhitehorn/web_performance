@@ -1,0 +1,5 @@
+source 'http://rubygems.org'
+
+gem "async_sinatra",       "~> 1.1.0"
+gem "em-hiredis",          "~> 0.2.1"
+gem "thin",                "~> 1.5.1"
