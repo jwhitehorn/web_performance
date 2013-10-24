@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
 
     <script type="text/javascript" src="javascripts/modernizr.js"></script>
+    <script type="text/javascript" src="javascripts/raphael-min.js"></script>    
+    <script type="text/javascript" src="javascripts/charts.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
     <script type="text/javascript">
@@ -61,6 +63,8 @@ $ git checkout gh-pages
 <h3>
 <a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
 
+<div id='chart1' style='width: 506px; height: 300px;'></div>
+
 <p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
 
 <h3>
@@ -95,4 +99,112 @@ $ git checkout gh-pages
 
     
   </body>
+  <script type="text/javascript">
+  var rawData = [
+  {name: 'Node.js', stat: 'median-ms', value:  4, users: 1},
+  {name: 'Node.js', stat: 'median-ms', value: 12, users: 5},
+  {name: 'Node.js', stat: 'median-ms', value: 24, users: 10},
+  {name: 'Node.js', stat: 'median-ms', value: 47, users: 20},
+  {name: 'Node.js', stat: 'median-ms', value: 102, users: 40},
+  {name: 'Node.js', stat: 'median-ms', value: 221, users: 80},
+  {name: 'Node.js', stat: 'req-sec', value: 220.6, users: 1},
+  {name: 'Node.js', stat: 'req-sec', value: 365, users: 5},
+  {name: 'Node.js', stat: 'req-sec', value: 359.5, users: 10},
+  {name: 'Node.js', stat: 'req-sec', value: 369.7, users: 20},  
+  {name: 'Node.js', stat: 'req-sec', value: 365.4, users: 40},
+  {name: 'Node.js', stat: 'req-sec', value: 353.1, users: 80},  
+  
+  {name: 'Async Sintra', stat: 'median-ms', value:  4, users: 1},
+  {name: 'Async Sintra', stat: 'median-ms', value: 11, users: 5},
+  {name: 'Async Sintra', stat: 'median-ms', value: 21, users: 10},
+  {name: 'Async Sintra', stat: 'median-ms', value: 48, users: 20},
+  {name: 'Async Sintra', stat: 'median-ms', value: 95, users: 40},
+  {name: 'Async Sintra', stat: 'median-ms', value: 191, users: 80},
+  {name: 'Async Sintra', stat: 'req-sec', value: 172.8, users: 1},
+  {name: 'Async Sintra', stat: 'req-sec', value: 325.1, users: 5},
+  {name: 'Async Sintra', stat: 'req-sec', value: 350.9, users: 10},
+  {name: 'Async Sintra', stat: 'req-sec', value: 372, users: 20},  
+  {name: 'Async Sintra', stat: 'req-sec', value: 389.5, users: 40},
+  {name: 'Async Sintra', stat: 'req-sec', value: 396.3, users: 80},  
+  
+  {name: 'Go', stat: 'median-ms', value:  3, users: 1},
+  {name: 'Go', stat: 'median-ms', value: 7, users: 5},
+  {name: 'Go', stat: 'median-ms', value: 13, users: 10},
+  {name: 'Go', stat: 'median-ms', value: 26, users: 20},
+  {name: 'Go', stat: 'median-ms', value: 50, users: 40},
+  {name: 'Go', stat: 'median-ms', value: 118, users: 80},
+  {name: 'Go', stat: 'req-sec', value: 275.1, users: 1},
+  {name: 'Go', stat: 'req-sec', value: 616.2, users: 5},
+  {name: 'Go', stat: 'req-sec', value: 679.1, users: 10},
+  {name: 'Go', stat: 'req-sec', value: 682.2, users: 20},  
+  {name: 'Go', stat: 'req-sec', value: 653.8, users: 40},
+  {name: 'Go', stat: 'req-sec', value: 609.1, users: 80},
+  
+  {name: 'Tornado/Python', stat: 'median-ms', value:  171, users: 1},
+  {name: 'Tornado/Python', stat: 'median-ms', value: 823, users: 5},
+  {name: 'Tornado/Python', stat: 'median-ms', value: 1669, users: 10},
+  {name: 'Tornado/Python', stat: 'median-ms', value: 3437, users: 20},
+  {name: 'Tornado/Python', stat: 'median-ms', value: 7421, users: 40},
+  {name: 'Tornado/Python', stat: 'median-ms', value: 15801, users: 80},
+  {name: 'Tornado/Python', stat: 'req-sec', value: 5.6, users: 1},
+  {name: 'Tornado/Python', stat: 'req-sec', value: 5.8, users: 5},
+  {name: 'Tornado/Python', stat: 'req-sec', value: 5.9, users: 10},
+  {name: 'Tornado/Python', stat: 'req-sec', value: 5.8, users: 20},  
+  {name: 'Tornado/Python', stat: 'req-sec', value: 5.3, users: 40},
+  {name: 'Tornado/Python', stat: 'req-sec', value: 5, users: 80},
+  
+  {name: 'Tornado/PyPy', stat: 'median-ms', value:  30, users: 1},
+  {name: 'Tornado/PyPy', stat: 'median-ms', value: 131, users: 5},
+  {name: 'Tornado/PyPy', stat: 'median-ms', value: 297, users: 10},
+  {name: 'Tornado/PyPy', stat: 'median-ms', value: 662, users: 20},
+  {name: 'Tornado/PyPy', stat: 'median-ms', value: 1644, users: 40},
+  {name: 'Tornado/PyPy', stat: 'median-ms', value: 3841, users: 80},
+  {name: 'Tornado/PyPy', stat: 'req-sec', value: 30.6, users: 1},
+  {name: 'Tornado/PyPy', stat: 'req-sec', value: 35.4, users: 5},
+  {name: 'Tornado/PyPy', stat: 'req-sec', value: 33.8, users: 10},
+  {name: 'Tornado/PyPy', stat: 'req-sec', value: 30.1, users: 20},  
+  {name: 'Tornado/PyPy', stat: 'req-sec', value: 24.3, users: 40},
+  {name: 'Tornado/PyPy', stat: 'req-sec', value: 20.7, users: 80}
+];
+
+var data = {};
+var colors = ['#12ad72', '#7d6ff7', '#89c4d7', '#f33c03', '#a06891', '#85f387', '#d78f06']
+  
+  jQuery(document).ready(function(){
+    var chart = new Charts.LineChart('chart1', {
+      fill_area: false,
+      label_max: false,
+      label_min: false,
+      show_grid: true,
+      max_y_labels: 10,
+      max_x_labels: 100
+    });
+
+    for(var i = 0; i != rawData.length; i++){
+      var entry = rawData[i];
+      if(entry.stat != 'req-sec')
+        continue;
+      var line = data[entry.name];
+      if(line === undefined)
+        line = [];
+      
+      line.push([entry.users, entry.value, 
+          {tooltip: entry.name + " - " + entry.value + " req/sec @ " + entry.users + " users"}]);
+      data[entry.name] = line;
+    }
+    
+    var lineNumber = 0;
+    for(var name in data){
+      var line = data[name];
+      chart.add_line({
+        data: line,
+        options: {
+          line_color: colors[lineNumber++]
+        }        
+      });      
+    }
+    
+    chart.draw();
+  });
+  </script>
 </html>
